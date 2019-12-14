@@ -19,10 +19,11 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    final static private MarkovTable table = new MarkovTable();
     final static private ObservableList<MarkovRow> data = FXCollections.observableArrayList(
-            new MarkovRow("0", "ba", "ab", "0", "1"),
-            new MarkovRow("1", "ca", "ac", "0", "2"),
-            new MarkovRow("2", "da", "ad", "0", "3"));
+            new MarkovRow(table, "0", "ba", "ab", "0", "1"),
+            new MarkovRow(table, "1", "ca", "ac", "0", "2"),
+            new MarkovRow(table, "2", "da", "ad", "0", "3"));
 
     public static void main(String[] args) {
         launch(args);
@@ -81,7 +82,7 @@ public class Main extends Application {
                     }
             );
 
-            DoubleBinding columnWidthPhiPsi = markovTableView.widthProperty().subtract(tK.widthProperty()).subtract(tI.widthProperty()).subtract(tJ.widthProperty()).divide(2);
+            DoubleBinding columnWidthPhiPsi = markovTableView.widthProperty().subtract(tK.widthProperty()).subtract(tI.widthProperty()).subtract(tJ.widthProperty()).divide(2).subtract(2);
             tPhi.prefWidthProperty().bind(columnWidthPhiPsi);
             tPsi.prefWidthProperty().bind(columnWidthPhiPsi);
 

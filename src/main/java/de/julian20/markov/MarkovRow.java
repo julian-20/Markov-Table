@@ -6,8 +6,10 @@ public class MarkovRow {
     private String psi;
     private String i;
     private String j;
+    private MarkovTable table;
 
-    public MarkovRow(String k, String phi, String psi, String i, String j) {
+    public MarkovRow(MarkovTable table, String k, String phi, String psi, String i, String j) {
+        this.table = table;
         this.k = k;
         this.phi = phi;
         this.psi = psi;
@@ -53,5 +55,23 @@ public class MarkovRow {
 
     public void setJ(String j) {
         this.j = j;
+    }
+
+    public boolean isEStart() {
+        return table.isEpsilonAtStartEndPhi() && phi.length() > 0 && phi.charAt(0) == 'e';
+    }
+
+    public boolean isEEnd() {
+        return table.isEpsilonAtStartEndPhi() && !isEStart() && phi.length() > 0 && phi.charAt(phi.length() - 1) == 'e';
+    }
+
+    public int getNextRow(String input) {
+        //TODO
+        return -1;
+    }
+
+    public String transform(String input) {
+        //TODO
+        return null;
     }
 }
