@@ -1,19 +1,18 @@
 package de.julian20.markov;
 
-import javafx.scene.control.TextField;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarkovTable {
-    private TextField inputField = (TextField) Main.getStage().getScene().lookup("#input");
     private List<MarkovRow> table = new ArrayList<>();
 
     private boolean checkEpsilonAtStartEndPhi = false;
 
     private boolean running = false;
-    private String currentWord = null;
+    private String currentWord = ""; //used in markov interpretation and displayed in GUI
     private int currentRow = -1;
+
+    private String input = ""; //text in Input Field, used to initialize currentWord
 
     private double frequency = 1;
 
@@ -33,10 +32,9 @@ public class MarkovTable {
     }
 
     public void initialize() {
-        currentWord = Main.getInputField().getText();
+        currentWord = input;
         currentRow = 0;
         running = true;
-        Main.getCurrentWordLabel().setText(currentWord);
     }
 
     public void step() {
@@ -49,7 +47,6 @@ public class MarkovTable {
             if (!isRowExisting(currentRow)) {
                 running = false;
             }
-            Main.getCurrentWordLabel().setText(currentWord);
         }
 
     }
@@ -72,5 +69,13 @@ public class MarkovTable {
 
     public void setFrequency(double frequency) {
         this.frequency = frequency;
+    }
+
+    public String getCurrentWord() {
+        return currentWord;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 }
