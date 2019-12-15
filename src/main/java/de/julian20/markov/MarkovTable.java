@@ -15,6 +15,8 @@ public class MarkovTable {
     private String currentWord = null;
     private int currentRow = -1;
 
+    private double frequency = 1;
+
     private MarkovRow getMarkovRow(int k) {
         MarkovRow search = null;
         for (MarkovRow r : table) {
@@ -62,5 +64,13 @@ public class MarkovTable {
 
     public void setTable(List<MarkovRow> table) {
         this.table = table;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
     }
 }

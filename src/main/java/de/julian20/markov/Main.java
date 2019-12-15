@@ -23,6 +23,7 @@ public class Main extends Application {
     private static Stage stage = null;
     private static TextField inputField = null;
     private static Label currentWordLabel = null;
+    private static TextField frequencyTextField = null;
 
     private static MarkovTable table = null;
     private static ObservableList<MarkovRow> data = null;
@@ -47,6 +48,7 @@ public class Main extends Application {
             //TODO, use @FXML annotations in a Controller class for UI elements
             inputField = (TextField) stage.getScene().lookup("#input");
             currentWordLabel = (Label) stage.getScene().lookup("#currentWord");
+            frequencyTextField = (TextField) stage.getScene().lookup("#frequencyTextField");
 
             table = new MarkovTable();
             data = FXCollections.observableArrayList(

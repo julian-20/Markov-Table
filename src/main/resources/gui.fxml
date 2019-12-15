@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<VBox maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.julian20.markov.Controller">
+<VBox maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julian20.markov.Controller.Controller">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -15,9 +15,9 @@
                         <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem mnemonicParsing="false" text="Save"/>
                         <MenuItem mnemonicParsing="false" text="Save As…"/>
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Quit"/>
+                    </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
@@ -51,10 +51,12 @@
                   <Button mnemonicParsing="false" text="Pause" />
                   <Button mnemonicParsing="false" text="Stop" />
                   <Pane>
-                     <children>
-                        <Text layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency: " />
-                        <TextField layoutX="60.0" maxHeight="1.7976931348623157E308" prefHeight="25.0" prefWidth="47.0" text="0.5" />
-                     </children>
+                      <children>
+                          <Text layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency: "/>
+                          <TextField id="frequencyTextField" fx:id="frequencyTextField" layoutX="60.0"
+                                     maxHeight="1.7976931348623157E308" onAction="#changeFrequency" prefHeight="25.0"
+                                     prefWidth="47.0" text="0.5"/>
+                      </children>
                   </Pane>
                </items>
             </ToolBar>
