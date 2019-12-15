@@ -57,8 +57,12 @@ public class MarkovRow {
         this.j = j;
     }
 
+    public boolean isESingle() {
+        return phi.length() == 1 && phi.charAt(0) == 'e';
+    }
+
     public boolean isEStart() {
-        return table.isEpsilonAtStartEndPhi() && phi.length() > 0 && phi.charAt(0) == 'e';
+        return table.isEpsilonAtStartEndPhi() && !isESingle() && phi.length() > 0 && phi.charAt(0) == 'e';
     }
 
     public boolean isEEnd() {
@@ -66,12 +70,47 @@ public class MarkovRow {
     }
 
     public int getNextRow(String input) {
-        //TODO
-        return -1;
+        if (isESingle()) {
+            return Integer.parseInt(i);
+        } else if (isEStart()) {
+            if (input.indexOf(phi.substring(1)) == 0)
+                return Integer.parseInt(i);
+            else
+                return Integer.parseInt(j);
+        } else if (isEEnd()) {
+            if (input.length() - phi.length() >= 0
+                    && input.substring(input.length() - phi.length() + 1).equals(phi.substring(0, phi.length() - 1)))
+                return Integer.parseInt(i);
+            else
+                return Integer.parseInt(j);
+        } else {
+            if (input.indexOf(phi) > -1)
+                return Integer.parseInt(i);
+            else
+                return Integer.parseInt(j);
+        }
     }
 
     public String transform(String input) {
-        //TODO
-        return null;
+        int pos = -1;
+        if (isESingle()) {
+            pos = 0;
+        } else if (isEStart()) {
+            pos = input.indexOf(phi.substring(1));
+            if (pos != 0)
+                pos = -1;
+        } else if (isEEnd()) {
+            if (input.length() - phi.length() + 1 >= 0
+                    && input.substring(input.length() - phi.length() + 1).equals(phi.substring(0, phi.length() - 1)))
+                pos = input.length() - phi.length() + 1;
+        } else {
+            pos = input.indexOf(phi);
+        }
+        if (pos > -1)
+            return input.substring(0, pos)
+                    + psi
+                    + input.substring(pos + (isESingle() || isEStart() || isEEnd() ? phi.length() - 1 : phi.length()));
+        else
+            return input;
     }
 }
