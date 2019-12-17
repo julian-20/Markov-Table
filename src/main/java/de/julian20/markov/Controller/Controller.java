@@ -75,13 +75,30 @@ public class Controller {
         //Current word border automatic resizing
         currentWordBorder.prefWidthProperty().bind(((Pane) currentWordBorder.getParent()).widthProperty().subtract(454)); //454 is the sum of all gaps before and after the box (everything else has fixed sizes)
 
+        markovTableView.setRowFactory(row -> new TableRow<MarkovRow>() {
+            @Override
+            protected void updateItem(MarkovRow item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || !Main.getTable().isRunning())
+                    setStyle("");
+                else if (Integer.parseInt(item.getK()) == Main.getTable().getCurrentRow())
+                    setStyle("-fx-background-color: #72FFF7;");
+                else
+                    setStyle("");
+            }
+        });
+
         markovTableView.setItems(Main.getData());
     }
 
     @FXML
     protected void step() {
+        //routine to either start running or to execute a row in the markov table
         Main.getTable().step();
+        //the label displaying the current state of the word has to be updated
         currentWordLabel.setText(Main.getTable().getCurrentWord());
+        //update the rows in the table view to update the color of the rows
+        markovTableView.refresh();
     }
 
     @FXML

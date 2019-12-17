@@ -16,7 +16,7 @@ public class MarkovTable {
 
     private double frequency = 1;
 
-    private MarkovRow getMarkovRow(int k) {
+    public MarkovRow getMarkovRow(int k) {
         MarkovRow search = null;
         for (MarkovRow r : table) {
             if (Integer.parseInt(r.getK()) == k) {
@@ -77,5 +77,13 @@ public class MarkovTable {
 
     public void setInput(String input) {
         this.input = input;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public int getCurrentRow() {
+        return currentRow;
     }
 }
